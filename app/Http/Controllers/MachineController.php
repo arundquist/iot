@@ -9,6 +9,7 @@ use App\Machine;
 use App\Probe;
 use App\Location;
 use App\Code;
+use App\User;
 use Auth;
 
 class MachineController extends Controller
