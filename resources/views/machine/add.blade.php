@@ -69,7 +69,7 @@
       <textarea name='code' cols='40' rows='10' placeholder="arduino code">arduino code</textarea><br/>
       @if (isset($machine))
         Existing code:<br/>
-        <code>{!! $machine->currentcode->code !!}</code>
+        <pre><code>{!! $machine->currentcode->code !!}</code></pre>
       @endif
     </div>
     <div>
