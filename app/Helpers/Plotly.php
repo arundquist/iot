@@ -30,7 +30,7 @@ class Plotly
         {
           x: ['$datestring'],
           y: [$values],
-          type: 'scatter'
+          type: 'scatter',
           marker: 'circle'
         }
         ];
