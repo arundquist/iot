@@ -31,6 +31,7 @@ class Plotly
           x: ['$datestring'],
           y: [$values],
           type: 'scatter'
+          marker: 'circle'
         }
         ];
 
