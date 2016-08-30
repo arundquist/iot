@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Deal with locationsw
 Route::get('/locations', ['as'=>'locations', 'uses'=>'LocationController@getAll']);
 Route::get('/locations/{id}', ['as'=>'single location', 'uses'=>'LocationController@getSingle']);
 Route::get('/locations/measurements/{location_id}/{type}',
