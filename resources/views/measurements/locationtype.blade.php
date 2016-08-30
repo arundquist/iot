@@ -11,7 +11,9 @@
 {!! Plotly::dateplot($measurements)!!}
 </div>
 <div>
-  {{{$measurements->count()}}} data points from {{{$measurements->first()->created_at->diffForHumans()}}}
+  <a href='{{{route('measurements',['location_id'=>$location->id,
+                                    'type'=>$type,
+                                    'format'=>'raw'])}}}'>{{{$measurements->count()}}} data points</a> from {{{$measurements->first()->created_at->diffForHumans()}}}
   ({{{$measurements->first()->created_at}}})
   to {{{$measurements->last()->created_at->diffForHumans()}}}
   ({{{$measurements->last()->created_at}}}).
