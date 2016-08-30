@@ -18,7 +18,7 @@ Route::get('/', function () {
 // Deal with locationsw
 Route::get('/locations', ['as'=>'locations', 'uses'=>'LocationController@getAll']);
 Route::get('/locations/{id}', ['as'=>'single location', 'uses'=>'LocationController@getSingle']);
-Route::get('/locations/measurements/{location_id}/{type}',
+Route::get('/locations/measurements/{location_id}/{type}/{format?}',
       ['as'=>'measurements',
       'uses'=>'LocationController@getMeasurement']);
 

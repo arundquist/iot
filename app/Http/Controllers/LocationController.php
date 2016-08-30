@@ -33,7 +33,7 @@ class LocationController extends Controller
           'types'=>$uniquetypes]);
     }
 
-    public function getMeasurement($location_id, $type)
+    public function getMeasurement($location_id, $type,$format='plot')
     {
       $location=Location::with('measurements', 'machines', 'measurements.probe')->findOrFail($location_id);
       $distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
@@ -47,10 +47,20 @@ class LocationController extends Controller
       $measurements=Measurement::where('location_id',$location_id)
               ->whereIn('probe_id', $probeidswithtype)
               ->get();
-      return view('measurements/locationtype',
-              ['measurements'=>$measurements,
-              'location'=>$location,
-              'type'=>$type,
-              'units'=>$units]);
+      switch ($format)
+      {
+        case 'raw':
+          return $measurements;
+          break;
+        case 'plot':
+          return view('measurements/locationtype',
+                  ['measurements'=>$measurements,
+                  'location'=>$location,
+                  'type'=>$type,
+                  'units'=>$units]);
+          break;
+        default:
+          return "not sure what you wanted";
+      };
     }
 }

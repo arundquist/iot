@@ -37,6 +37,8 @@ class PlotTest extends TestCase
 
       $this->visit("locations/measurements/$location->id/{$probes->first()->type}")
           ->see($measurements->random()->measurement);
+      $this->visit("locations/measurements/$location->id/{$probes->first()->type}/raw")
+          ->seeJson();
 
     }
 
