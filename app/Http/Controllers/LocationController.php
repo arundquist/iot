@@ -9,6 +9,7 @@ use App\Location;
 use App\Probe;
 use App\Machine;
 use App\Measurement;
+use Excel;
 
 class LocationController extends Controller
 {
@@ -59,6 +60,24 @@ class LocationController extends Controller
                   'location'=>$location,
                   'type'=>$type,
                   'units'=>$units]);
+          break;
+        case 'excel':
+          Excel::create($type, function($excel) use($measurements) {
+            $excel->sheet('Sheet 1', function($sheet) use($measurements) {
+                $sheet->fromArray($measurements);
+            });
+          })->export('xlsx');
+          break;
+        case 'csv':
+          Excel::create($type, function($excel) use($measurements) {
+            $excel->sheet('Sheet 1', function($sheet) use($measurements) {
+                $sheet->fromArray($measurements);
+            });
+          })->export('csv');
+          break;
+        case 'html':
+          return view('measurements/htmltable',
+            ['measurements'=>$measurements]);
           break;
         default:
           return "not sure what you wanted";
