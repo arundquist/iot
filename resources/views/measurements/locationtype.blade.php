@@ -8,7 +8,7 @@
 
 
 <div>
-{!! Plotly::dateplot($measurements)!!}
+{!! Plotly::dateplot($measurements, $type, $units)!!}
 </div>
 <div>
   <a href='{{{route('measurements',['location_id'=>$location->id,

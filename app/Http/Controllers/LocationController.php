@@ -44,7 +44,8 @@ class LocationController extends Controller
       $probeidswithtype=$probes->pluck('id')->all();
       $units=$probes->first()->units;
 
-      $measurements=Measurement::where('location_id',$location_id)
+      $measurements=Measurement::select('created_at', 'measurement')
+              ->where('location_id',$location_id)
               ->whereIn('probe_id', $probeidswithtype)
               ->get();
       switch ($format)

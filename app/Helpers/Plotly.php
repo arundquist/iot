@@ -9,12 +9,13 @@ class Plotly
     return "plotly is awesome";
   }
 
-  static function dateplot($measurements)
+  static function dateplot($measurements,$type,$units)
   {
     $dates=$measurements->pluck('created_at')->all();
-    $probe=$measurements->first()->probe;
-    $type=$probe->type;
-    $units=$probe->units;
+    //$probe=$measurements->first()->probe;
+    //$type=$probe->type;
+    //$units=$probe->units;
+    
     $correcteddates=[];
     foreach ($dates AS $date)
     {
