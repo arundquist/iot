@@ -11,6 +11,12 @@ use App\Machine;
 
 class AdminController extends Controller
 {
+    public function getAdmin()
+    {
+      $this->authorize('admin');
+      return view('admin/admin');
+    }
+
     public function users()
     {
       $this->authorize('admin');

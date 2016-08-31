@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Deal with locationsw
+// Deal with locations
 Route::get('/locations', ['as'=>'locations', 'uses'=>'LocationController@getAll']);
 Route::get('/locations/{id}', ['as'=>'single location', 'uses'=>'LocationController@getSingle']);
 Route::get('/locations/measurements/{location_id}/{type}/{format?}',
@@ -30,6 +30,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/measurement', ['as'=>'measurement', 'uses'=>'MeasurementController@getMeasurement']);
 
 // deal with users
+Route::get('/admin', ['middleware'=>'auth', 'as'=>'admin', 'uses'=>'AdminController@getAdmin']);
 Route::get('/admin/users', ['middleware'=>'auth', 'as'=>'show users','uses'=>'AdminController@users']);
 Route::post('/admin/users', ['middleware'=>'auth', 'uses'=>'AdminController@approve']);
 
@@ -41,7 +42,7 @@ Route::get('/admin/allprobes', ['middleware'=>'auth', 'as'=>'see all probes',
         'uses'=>'AdminController@getAllprobes']);
 
 //Deal with machines
-Route::get('/machine/add', ['middleware'=>'auth', 'uses'=>'MachineController@getAdd']);
+Route::get('/machine/add', ['middleware'=>'auth', 'as'=>'add machine','uses'=>'MachineController@getAdd']);
 Route::post('/machine/add', ['middleware'=>'auth', 'uses'=>'MachineController@postAdd']);
 Route::get('/machine/edit/{id}', ['middleware'=>'auth', 'as'=>'machine edit', 'uses'=>'MachineController@getEdit']);
 Route::post('/machine/edit/{id}', ['middleware'=>'auth', 'uses'=>'MachineController@postEdit']);

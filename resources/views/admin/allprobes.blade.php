@@ -3,6 +3,9 @@
 @section('content')
 
 <div class='container'>
+  <div>
+    <a href="{{route('add or edit probe')}}">Add a new probe</a>
+  </div>
   <table class='table table-bordered'>
     <tr><th>Probe name</th>
         <th>Description</th>

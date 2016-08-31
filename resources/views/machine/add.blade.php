@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class='container'>
 @if (isset($machine))
   <form action='{{url("machine/edit/$machine->id")}}' method='POST'>
 @else
@@ -81,5 +81,5 @@
     </div>
 
 </form>
-hi there
+</div>
 @endsection
