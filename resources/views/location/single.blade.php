@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class='container'>
 <h1>{{{$location->shortname}}}</h1>
+
 <div>
   <p>{{{$location->description}}}</p>
 </div>
@@ -13,5 +14,5 @@
     @endforeach
   </ul>
 </div>
-
+</div>
 @endsection
