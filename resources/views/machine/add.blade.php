@@ -28,7 +28,7 @@
       @endif
 
       @foreach ($probes AS $probe)
-        <li><input type='checkbox' name='probes[{{{$probe->id}}}]' >p[{{{$probe->id}}}]: {{{$probe->name}}} {{{$probe->description}}}</li>
+        <li><input type='checkbox' name='probes[{{{$probe->id}}}]' >p[{{{$probe->id}}}] {{{$probe->name}}}: {{{$probe->description}}}</li>
       @endforeach
       </ul>
     </div>
