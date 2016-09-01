@@ -23,12 +23,12 @@
       @if (isset($machine))
 
         @foreach ($machine->probes AS $probe)
-          <li><input type='checkbox' name='probes[{{{$probe->id}}}]' value='1' checked>{{{$probe->shortname}}}: {{{$probe->description}}}</li>
+          <li><input type='checkbox' name='probes[{{{$probe->id}}}]' value='1' checked>p[{{{$probe->id}}}]: {{{$probe->shortname}}}: {{{$probe->description}}}</li>
         @endforeach
       @endif
 
       @foreach ($probes AS $probe)
-        <li><input type='checkbox' name='probes[{{{$probe->id}}}]' >{{{$probe->shortname}}}: {{{$probe->description}}}</li>
+        <li><input type='checkbox' name='probes[{{{$probe->id}}}]' >p[{{{$probe->id}}}]: {{{$probe->shortname}}}: {{{$probe->description}}}</li>
       @endforeach
       </ul>
     </div>
