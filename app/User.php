@@ -28,4 +28,20 @@ class User extends Authenticatable
     {
       return $this->hasMany('App\Code');
     }
+
+    public function getMachinesAttribute()
+    {
+      $codes=$this->codes;
+      $machines=collect([]);
+      foreach ($codes as $code)
+      {
+        $thismachine=$code->machine;
+        $currentcode=$thismachine->currentcode;
+        if (($code->id)==($currentcode->id))
+        {
+          $machines->push($thismachine);
+        };
+      };
+      return $machines;
+    }
 }

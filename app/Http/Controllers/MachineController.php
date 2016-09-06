@@ -66,8 +66,9 @@ class MachineController extends Controller
 
     public function getEdit($id)
     {
-      $this->authorize('approved');
+      //$this->authorize('approved');
       $machine=Machine::findOrFail($id);
+      $this->authorize('allowedmachines', $machine);
       $macprobes=$machine->probes()->pluck('id')->all();
       //dd($macprobes);
       $probes=\App\Probe::whereNotIn('id',$macprobes)->get();
@@ -83,8 +84,9 @@ class MachineController extends Controller
 
     public function postEdit(Request $request, $id)
     {
-      $this->authorize('approved');
+      //$this->authorize('approved');
       $machine=Machine::findOrFail($id);
+      $this->authorize('allowedmachines', $machine);
 
       // right here you need to deal with the request
       // and update the machine.
@@ -128,5 +130,13 @@ class MachineController extends Controller
                                   'locations'=>$locations,
                                 'machine'=>$machine]);
 
+    }
+
+    public function getUsermachines()
+    {
+      $this->authorize('approved');
+      $user=Auth::user();
+      $machines=$user->machines;
+      return view('machine/usermachines', ['machines'=>$machines]);
     }
 }

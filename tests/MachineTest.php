@@ -62,6 +62,9 @@ class MachineTest extends TestCase
         ->press('edit machine')
         ->see($probeids[0])
         ->see($code->code);
+    $this->actingAs($user)
+        ->visit("/machine")
+        ->see($user->machines->first()->macaddress);
 
   }
 }

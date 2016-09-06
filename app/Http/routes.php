@@ -48,3 +48,5 @@ Route::get('/machine/edit/{id}', ['middleware'=>'auth', 'as'=>'machine edit', 'u
 Route::post('/machine/edit/{id}', ['middleware'=>'auth', 'uses'=>'MachineController@postEdit']);
 Route::get('/admin/allmachines', ['middleware'=>'auth', 'as'=>'see all machines',
         'uses'=>'AdminController@getAllmachines']);
+Route::get('/machine', ['middleware'=>'auth', 'as'=>'users machines',
+        'uses'=>'MachineController@getUsermachines']);

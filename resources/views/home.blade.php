@@ -11,6 +11,7 @@
                     You are logged in!
                     <ul>
                       <li><a href="{{route('add machine')}}">Add a machine</a></li>
+                      <li><a href="{{route('users machines')}}">Your machines</a></li>
                     </ul>
                 </div>
             </div>

@@ -26,12 +26,28 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
+        $gate->before(function ($user, $ability) {
+            if ($user->admin) {
+                return true;
+            };
+        });
+
         $gate->define('approved', function ($user) {
             return $user->approved;
         });
 
         $gate->define('admin', function ($user) {
             return $user->admin;
+        });
+
+        // non-admin users should only be able to edit machines that they "own"
+        // That's determined by machines whose current 'code' is owned by
+        // the current user
+
+        $gate->define('allowedmachines', function($user, $machine){
+            $machineids=$user->machines->pluck('id')->all();
+          //  dd($machineids);
+            return in_array($machine->id, $machineids);
         });
     }
 }
