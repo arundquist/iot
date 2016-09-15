@@ -33,4 +33,19 @@ class Machine extends Model
       return $code;
     }
 
+    public function getLastmeasurementAttribute()
+    {
+      $measure=$this->measurements()->orderBy('created_at', 'DESC')->first();
+      if (!$measure)
+      {
+        return $this->created_at;
+      };
+      return $measure->created_at;
+    }
+
+    public function getNumberofmeasurementsAttribute()
+    {
+      return $this->measurements()->count();
+    }
+
 }
