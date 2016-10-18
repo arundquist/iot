@@ -23,9 +23,14 @@ class LocationController extends Controller
 
     public function getSingle($id)
     {
-      $location=Location::with('measurements', 'machines', 'measurements.probe')->findOrFail($id);
-      $distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
-      $probeids=$distinctmeasurements->pluck('probe_id')->all();
+      // right now this is pretty slow
+      // I think it's because it's reading in all the measurements
+      $picks = Measurement::distinct()->select('probe_id')
+        ->where('location_id', '=', $id)->groupBy('probe_id')->get();
+      $probeids=$picks->pluck('probe_id')->all();
+      $location=Location::findOrFail($id);
+      //$distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
+      //$probeids=$distinctmeasurements->pluck('probe_id')->all();
       $types=Probe::whereIn('id',$probeids)->get()->pluck('type','id')->all();
       $uniquetypes=array_unique($types);
 
