@@ -43,6 +43,7 @@ class LocationController extends Controller
     {
     //  $location=Location::with('measurements', 'machines', 'measurements.probe')->findOrFail($location_id);
     //  $distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
+      $location=Location::findOrFail($location_id);
       $picks = Measurement::distinct()->select('probe_id')
         ->where('location_id', '=', $location_id)->groupBy('probe_id')->get();
       $probeids=$picks->pluck('probe_id')->all();
