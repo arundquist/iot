@@ -41,9 +41,12 @@ class LocationController extends Controller
 
     public function getMeasurement($location_id, $type,$format='plot')
     {
-      $location=Location::with('measurements', 'machines', 'measurements.probe')->findOrFail($location_id);
-      $distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
-      $probeids=$distinctmeasurements->pluck('probe_id')->all();
+    //  $location=Location::with('measurements', 'machines', 'measurements.probe')->findOrFail($location_id);
+    //  $distinctmeasurements=$location->measurements()->groupBy('probe_id')->get();
+      $picks = Measurement::distinct()->select('probe_id')
+        ->where('location_id', '=', $id)->groupBy('probe_id')->get();
+      $probeids=$picks->pluck('probe_id')->all();
+    //  $probeids=$distinctmeasurements->pluck('probe_id')->all();
       $probes=Probe::whereIn('id', $probeids)
                       ->where('type',$type)
                       ->get();
